@@ -1,0 +1,23 @@
+.quiz_container {
+  height: unset;
+  .quiz {
+    padding-left: 60px;
+    padding-top: 40px;
+    padding-right: 46px;
+    .question {
+      font-size: 14px;
+    }
+    hr {
+      border: 0.794239px solid #dbdef0;
+      margin-bottom: 15px;
+    }
+    .option {
+      margin-bottom: 15px;
+      margin-top: 12px;
+      display: flex;
+      .btn-secondery {
+        margin-right: 13px;
+      }
+    }
+  }
+}

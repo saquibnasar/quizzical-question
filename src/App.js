@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import Home from "./component/Home";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Quiz from "./component/Quiz";
+import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 
 function App() {
+  const [datas, setDatas] = useState([]);
+  const [quiz, setQuiz] = useState({
+    isCheck: true,
+    id: nanoid(),
+  });
+  useEffect(() => {
+    fetch(
+      "https://opentdb.com/api.php?amount=5&category=10&difficulty=easy&type=multiple"
+    )
+      .then((res) => res)
+      .then((res) => res.json())
+      .then((data) => setDatas(data.results));
+  }, [0]);
+  console.log([...datas]);
+  // const newObject = Object.assign([...datas], { quiz });
+  // console.log(newObject);
+  // // let data = [...datas];
+  // // console.log(data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/quiz">
+            <Quiz data={datas} />
+          </Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
