@@ -29,7 +29,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route exact path="/quizzical-question">
+          <Route exact path="/quizzical-question/">
             <Home />
           </Route>
           <Route exact path="/quiz">
