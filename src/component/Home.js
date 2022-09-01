@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import blob1 from "../image/blob1.png";
 import blob2 from "../image/blob2.png";
-export default function Home(props) {
+export default function Home() {
   return (
     <>
       <div className="container">
