@@ -186,8 +186,7 @@ export default function Quiz() {
         </section>
         <div className="footer">
           <p className="foooter-para">
-            You scored {currentAnswer.length}/5 correct answers You scored
-            answers
+            You scored {currentAnswer.length}/5 correct answers
           </p>
           <button
             type="button"
