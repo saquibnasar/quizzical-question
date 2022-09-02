@@ -99,11 +99,9 @@ export default function Quiz() {
         for (const data of toggleData.options) {
           if (data.color === "green") {
             if (data.option === data.answer) {
-              console.log(typeof toggleData);
               setDatas((value) => {
                 const test = value.map((val) => {
                   if (val.question === data.question) {
-                    console.log(val);
                     setCurrentAnswer((data) => {
                       return [...data, val];
                     });
