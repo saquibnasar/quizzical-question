@@ -65,15 +65,16 @@ export default function Quiz() {
       );
   }, [loader]);
 
-  const selectedToggleHeader = (optionItem, question) => {
+  const selectedToggleHeader = (questionId, question) => {
     setDatas((value) => {
       const test = value.map((val) => {
         if (val.question === question) {
           for (let value of val.options) {
             value.color = "white";
-            if (value.id === optionItem) {
+            if (value.id === questionId) {
               if (value.color === "white") {
                 value.color = "green";
+                setNewGame(false);
               } else if (value.color === "pink") {
                 value.color = "pink";
               }
@@ -126,7 +127,6 @@ export default function Quiz() {
                       value.color = "red";
                     }
                   }
-
                   return { ...val };
                 });
 
@@ -139,7 +139,7 @@ export default function Quiz() {
       setNewGame(true);
     }
   };
-  console.log(currentAnswer);
+
   return (
     <>
       <div className="container quiz_container">
@@ -184,18 +184,22 @@ export default function Quiz() {
             );
           })}
         </section>
-        <div className="footer">
-          <p className="foooter-para">
-            You scored {currentAnswer.length}/5 correct answers
-          </p>
-          <button
-            type="button"
-            className="btn-main m-auto"
-            onClick={checkToggle}
-          >
-            {newGame ? "New Game" : "Check Answers"}
-          </button>
-        </div>
+        {datas.length ? (
+          <div className="footer">
+            <p className="foooter-para">
+              You scored {currentAnswer.length}/5 correct answers
+            </p>
+            <button
+              type="button"
+              className="btn-main m-auto"
+              onClick={checkToggle}
+            >
+              {newGame ? "New Game" : "Check Answers"}
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
