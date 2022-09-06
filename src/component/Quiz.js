@@ -66,8 +66,8 @@ export default function Quiz() {
   }, [loader]);
 
   const selectedToggleHeader = (questionId, question) => {
-    setDatas((value) => {
-      const test = value.map((val) => {
+    setDatas((datas) => {
+      const test = datas.map((val) => {
         if (val.question === question) {
           for (let value of val.options) {
             value.color = "white";
@@ -95,6 +95,8 @@ export default function Quiz() {
       setCurrentAnswer([]);
       setLoader(loader + 1);
     } else {
+      let isAlert = false;
+
       for (const toggleData of datas) {
         for (const data of toggleData.options) {
           if (data.color === "green") {
@@ -117,24 +119,29 @@ export default function Quiz() {
 
                 return test;
               });
-            } else {
-              setDatas((value) => {
-                const test = value.map((val) => {
-                  for (let value of val.options) {
-                    if (value.color === "green") {
-                      value.color = "red";
-                    }
-                  }
-                  return { ...val };
-                });
-
-                return test;
-              });
             }
+            setDatas((value) => {
+              const test = value.map((val) => {
+                for (let value of val.options) {
+                  if (value.color === "green") {
+                    value.color = "red";
+                  }
+                }
+                return { ...val };
+              });
+
+              return test;
+            });
+
+            setNewGame(true);
+            isAlert = true;
           }
         }
       }
-      setNewGame(true);
+
+      if (!isAlert) {
+        alert("Please answer the question first");
+      }
     }
   };
 
@@ -168,7 +175,7 @@ export default function Quiz() {
                               ? "#59e391"
                               : "",
                         }}
-                        onClick={(e) => {
+                        onClick={() => {
                           selectedToggleHeader(ansItem.id, ansItem.question);
                         }}
                       >
