@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/quizzical-question/static/css/main.15cd06eb.css",
-    "main.js": "/quizzical-question/static/js/main.7d16c3ff.js",
+    "main.js": "/quizzical-question/static/js/main.308e227a.js",
     "static/js/787.fa62f795.chunk.js": "/quizzical-question/static/js/787.fa62f795.chunk.js",
     "index.html": "/quizzical-question/index.html",
     "main.15cd06eb.css.map": "/quizzical-question/static/css/main.15cd06eb.css.map",
-    "main.7d16c3ff.js.map": "/quizzical-question/static/js/main.7d16c3ff.js.map",
+    "main.308e227a.js.map": "/quizzical-question/static/js/main.308e227a.js.map",
     "787.fa62f795.chunk.js.map": "/quizzical-question/static/js/787.fa62f795.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.15cd06eb.css",
-    "static/js/main.7d16c3ff.js"
+    "static/js/main.308e227a.js"
   ]
 }
