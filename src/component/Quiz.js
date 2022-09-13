@@ -22,7 +22,7 @@ export default function Quiz() {
     )
       .then((res) => res)
       .then((res) => res.json())
-      .then((data) =>
+      .then((data) => {
         setDatas(
           data.results.map((data) => {
             data.options = shuffle([
@@ -61,8 +61,8 @@ export default function Quiz() {
             ]);
             return data;
           })
-        )
-      );
+        );
+      });
   }, [loader]);
 
   const selectedToggleHeader = (questionId, question) => {
@@ -93,6 +93,7 @@ export default function Quiz() {
     if (newGame) {
       setNewGame(false);
       setCurrentAnswer([]);
+
       setLoader(loader + 1);
     } else {
       let isAlert = false;
@@ -147,49 +148,57 @@ export default function Quiz() {
 
   return (
     <>
-      <div className="container quiz_container">
-        <img src={blob1} alt="" className="blob3" />
-        <img src={blob2} alt="" className="blob4" />
-        <section className="quiz">
-          {datas.map((value, index) => {
-            return (
-              <div key={index}>
-                <h3 className="question">{value.question}</h3>
-                <div className="option">
-                  {value.options.map((ansItem, id) => {
-                    return (
-                      <button
-                        key={id}
-                        className={`btn-secondery ${
-                          ansItem.color === "pink"
-                            ? "rightAnswer"
-                            : ansItem.color === "red"
-                            ? "wrongAnswer"
-                            : ""
-                        }`}
-                        style={{
-                          backgroundColor:
-                            ansItem.color === "white"
-                              ? "white"
-                              : ansItem.color === "green"
-                              ? "#59e391"
-                              : "",
-                        }}
-                        onClick={() => {
-                          selectedToggleHeader(ansItem.id, ansItem.question);
-                        }}
-                      >
-                        {ansItem.option}
-                      </button>
-                    );
-                  })}
+      {!datas.length ? (
+        <div class="loader">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      ) : (
+        <div className="container quiz_container">
+          <img src={blob1} alt="" className="blob3" />
+          <img src={blob2} alt="" className="blob4" />
+          <section className="quiz">
+            {datas.map((value, index) => {
+              return (
+                <div key={index}>
+                  <h3 className="question">{value.question}</h3>
+                  <div className="option">
+                    {value.options.map((ansItem, id) => {
+                      return (
+                        <button
+                          key={id}
+                          className={`btn-secondery ${
+                            ansItem.color === "pink"
+                              ? "rightAnswer"
+                              : ansItem.color === "red"
+                              ? "wrongAnswer"
+                              : ""
+                          }`}
+                          style={{
+                            backgroundColor:
+                              ansItem.color === "white"
+                                ? "white"
+                                : ansItem.color === "green"
+                                ? "#59e391"
+                                : "",
+                          }}
+                          onClick={() => {
+                            selectedToggleHeader(ansItem.id, ansItem.question);
+                          }}
+                        >
+                          {ansItem.option}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            );
-          })}
-        </section>
-        {datas.length ? (
+              );
+            })}
+          </section>
+
           <div className="footer">
             <p className="foooter-para">
               You scored {currentAnswer.length}/5 correct answers
@@ -202,10 +211,8 @@ export default function Quiz() {
               {newGame ? "New Game" : "Check Answers"}
             </button>
           </div>
-        ) : (
-          ""
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }
