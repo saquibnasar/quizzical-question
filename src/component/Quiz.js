@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 export default function Quiz() {
   const [datas, setDatas] = useState([]);
   const [currentAnswer, setCurrentAnswer] = useState([]);
+  const [isLoader, setIsLoader] = useState(true);
   const [newGame, setNewGame] = useState(false);
   const [loader, setLoader] = useState(1);
 
@@ -62,6 +63,7 @@ export default function Quiz() {
             return data;
           })
         );
+        setIsLoader(true);
       });
   }, [loader]);
 
@@ -93,7 +95,7 @@ export default function Quiz() {
     if (newGame) {
       setNewGame(false);
       setCurrentAnswer([]);
-
+      setIsLoader(false);
       setLoader(loader + 1);
     } else {
       let isAlert = false;
@@ -146,10 +148,12 @@ export default function Quiz() {
     }
   };
 
+  console.log(isLoader);
+
   return (
     <>
-      {!datas.length ? (
-        <div class="loader">
+      {!datas.length | !isLoader ? (
+        <div className="loader">
           <span></span>
           <span></span>
           <span></span>
